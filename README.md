@@ -18,7 +18,7 @@ MockAccidentAPI is a lightweight Flask-based RESTful API designed to simulate tr
 
 ### Clone the Repository
 
-git clone [https://github.com/yourusername/MockAccidentAPI.git](https://github.com/sampokuhalampi/MockAccidentAPI.git)](https://github.com/sampokuhalampi/MockAccidentAPI.git)
+git clone https://github.com/sampokuhalampi/MockAccidentAPI.git
 
 ## Install Dependencies
 
