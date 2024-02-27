@@ -18,7 +18,7 @@ MockAccidentAPI is a lightweight Flask-based RESTful API designed to simulate tr
 
 ### Clone the Repository
 
-git clone https://github.com/yourusername/MockAccidentAPI.git
+git clone [https://github.com/yourusername/MockAccidentAPI.git](https://github.com/sampokuhalampi/MockAccidentAPI.git)](https://github.com/sampokuhalampi/MockAccidentAPI.git)
 
 ## Install Dependencies
 
@@ -30,8 +30,8 @@ pip install -r requirements.txt
 Run the Flask shell and create the database tables:
 
 flask shell
->>> from app import db
->>> db.create_all()
+from app import db
+db.create_all()
 
 ## Start the Application
 Start the Flask application from the command line:
