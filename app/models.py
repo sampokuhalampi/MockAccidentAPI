@@ -16,11 +16,13 @@ class Accident(db.Model):
 
 class Traffic(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    location = db.Column(db.String(128), nullable=False)
+    latitude = db.Column(db.Float, nullable=False)
+    longitude = db.Column(db.Float, nullable=False)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
     volume = db.Column(db.Integer, nullable=False, comment="Liikenteen määrä, esim. ajoneuvot tunnissa")
     average_speed = db.Column(db.Float, nullable=False, comment="Keskinopeus alueella km/h")
     congestion_level = db.Column(db.String(50), nullable=True, comment="Ruuhkan taso, esim. kevyt, kohtalainen, raskas")
 
     def __repr__(self):
+
         return f'<Traffic at {self.location} - Volume: {self.volume}, Avg Speed: {self.average_speed}km/h>'
