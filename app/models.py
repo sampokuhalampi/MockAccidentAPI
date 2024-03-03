@@ -24,4 +24,5 @@ class Traffic(db.Model):
     congestion_level = db.Column(db.String(50), nullable=True, comment="Ruuhkan taso, esim. kevyt, kohtalainen, raskas")
 
     def __repr__(self):
+
         return f'<Traffic at {self.location} - Volume: {self.volume}, Avg Speed: {self.average_speed}km/h>'
