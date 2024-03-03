@@ -27,7 +27,7 @@ def get_accident(id):
         'accidentType': accident.accident_type,
         'severity': accident.severity,
         'participants': accident.participants,
-        'weatherConditions': accident.weather_conditions
+        'weatherconditions': accident.weather_conditions
     })
 
 @app.route('/accidents', methods=['POST'])
@@ -40,7 +40,7 @@ def add_accident():
         accident_type=data['accident_type'],
         severity=data['severity'],
         participants=data['participants'],
-        weather_conditions=data['weatheronditions']
+        weather_conditions=data['weather_conditions']
     )
     db.session.add(accident)
     db.session.commit()
