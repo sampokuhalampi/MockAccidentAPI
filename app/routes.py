@@ -34,13 +34,13 @@ def get_accident(id):
 def add_accident():
     data = request.get_json()
     accident = Accident(
-        latitude=data['location']['latitude'],
-        longitude=data['location']['longitude'],
+        latitude=data['latitude'],
+        longitude=data['longitude'],
         timestamp=datetime.fromisoformat(data['timestamp']),
-        accident_type=data['accidentType'],
+        accident_type=data['accident_type'],
         severity=data['severity'],
         participants=data['participants'],
-        weather_conditions=data['weatherConditions']
+        weather_conditions=data['weatheronditions']
     )
     db.session.add(accident)
     db.session.commit()
@@ -76,8 +76,8 @@ def get_traffic_data(id):
 def add_traffic():
     data = request.get_json()
     traffic = Traffic(
-        latitude=data['location']['latitude'],
-        longitude=data['location']['longitude'],
+        latitude=data['latitude'],
+        longitude=data['longitude'],
         timestamp=datetime.fromisoformat(data['timestamp']),
         volume=data['volume'],
         average_speed=data['averageSpeed'],
