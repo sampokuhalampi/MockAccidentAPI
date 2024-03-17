@@ -8,8 +8,8 @@ from sqlalchemy.exc import SQLAlchemyError
 def get_accidents():
     try:
         accidents = Accident.query.all()
-    except SQLAlchemyError:
-        return jsonify({'error': 'Database error occurred'}), 500
+    except SQLAlchemyError as e:
+        return jsonify({'error': f'Error fetching accidents from database: {str(e)}'}), 500
 
     return jsonify([{
         'id': accident.id,
@@ -23,7 +23,13 @@ def get_accidents():
 
 @app.route('/accidents/<int:id>', methods=['GET'])
 def get_accident(id):
-    accident = Accident.query.get_or_404(id)
+    try:
+        accident = Accident.query.get(id)
+        if accident is None:
+            return jsonify({'error': f'Accident with id {id} not found'}), 404
+    except SQLAlchemyError as e:
+        return jsonify({'error': f'Error fetching accident with id {id} from database: {str(e)}'}), 500
+
     return jsonify({
         'id': accident.id,
         'location': {'latitude': accident.latitude, 'longitude': accident.longitude},
@@ -60,8 +66,8 @@ def add_accident():
 def get_traffic():
     try:
         traffic_data = Traffic.query.all()
-    except SQLAlchemyError:
-        return jsonify({'error': 'Database error occurred'}), 500
+    except SQLAlchemyError as e:
+        return jsonify({'error': f'Error fetching traffic data from database: {str(e)}'}), 500
 
     return jsonify([{
         'id': data.id,
@@ -74,7 +80,13 @@ def get_traffic():
 
 @app.route('/traffic/<int:id>', methods=['GET'])
 def get_traffic_data(id):
-    traffic_data = Traffic.query.get_or_404(id)
+    try:
+        traffic_data = Traffic.query.get(id)
+        if traffic_data is None:
+            return jsonify({'error': f'Traffic data with id {id} not found'}), 404
+    except SQLAlchemyError as e:
+        return jsonify({'error': f'Error fetching traffic data with id {id} from database: {str(e)}'}), 500
+
     return jsonify({
         'id': traffic_data.id,
         'location': {'latitude': traffic_data.latitude, 'longitude': traffic_data.longitude},
@@ -83,6 +95,7 @@ def get_traffic_data(id):
         'averageSpeed': traffic_data.average_speed,
         'congestionLevel': traffic_data.congestion_level
     })
+
 
 @app.route('/traffic', methods=['POST'])
 def add_traffic():
