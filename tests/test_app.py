@@ -11,7 +11,7 @@ class TestCase(unittest.TestCase):
         app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite://'
         app.config['TESTING'] = True
         self.app = app.test_client()
-        self.headers = {'API-Key': 'ASDAPIkey'}  # Korvaa tämä omalla API-avaimellasi
+        self.headers = {'API-Key': 'ASDAPIkey'} 
 
         # Create database tables
         with app.app_context():
