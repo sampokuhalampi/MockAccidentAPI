@@ -15,5 +15,5 @@ RUN chgrp -R 0 /app && \
 USER appuser
 
 ENTRYPOINT ["python3", "-m"]
-CMD ["flask", "run"]
+CMD ["flask", "run", "--host=0.0.0.0", "--port=5000"]
 EXPOSE 5000
