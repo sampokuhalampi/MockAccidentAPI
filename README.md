@@ -26,13 +26,6 @@ Use `pip` to install the dependencies from the `requirements.txt` file:
 
 pip install -r requirements.txt
 
-## Initialize the Database 
-Run the Flask shell and create the database tables:
-
-flask shell
-from app import db
-db.create_all()
-
 ## Start the Application
 Start the Flask application from the command line:
 
