@@ -18,10 +18,11 @@ class Accident(db.Model):
 class AccidentCoordinates(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     accident_id = db.Column(db.Integer, db.ForeignKey('accident.id'), nullable=False)
-    geometry = db.Column(db.JSON, nullable=True)
+    latitude = db.Column(db.Float, nullable=False)
+    longitude = db.Column(db.Float, nullable=False)
 
     def __repr__(self):
-        return f'<AccidentCoordinate {self.id} - Geometry: {self.geometry}>'
+        return f'<AccidentCoordinate {self.id} - Latitude: {self.latitude}, Longitude: {self.longitude}>'
 
 class Traffic(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -39,7 +40,8 @@ class Traffic(db.Model):
 class TrafficCoordinates(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     traffic_id = db.Column(db.Integer, db.ForeignKey('traffic.id'), nullable=False)
-    geometry = db.Column(db.JSON, nullable=True)
+    latitude = db.Column(db.Float, nullable=False)
+    longitude = db.Column(db.Float, nullable=False)
 
     def __repr__(self):
-        return f'<TrafficCoordinate {self.id} - Geometry: {self.geometry}>'
+        return f'<TrafficCoordinate {self.id} - Latitude: {self.latitude}, Longitude: {self.longitude}>'
