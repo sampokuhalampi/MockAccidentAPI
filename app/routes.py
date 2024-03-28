@@ -32,15 +32,17 @@ def add_accident():
             longitude=data.get('longitude')
         )
         db.session.add(accident)
-        db.session.flush()  # Flush to get the accident id before committing
-
+        db.session.flush()  
+        
         if 'geometry' in data:
-            for geom in data['geometry'][0]:
-                acc_coord = AccidentCoordinates(
-                    accident_id=accident.id,
-                    geometry=geom
-                )
-                db.session.add(acc_coord)
+            for geom_list in data['geometry']: 
+                for geom in geom_list:  
+                    acc_coord = AccidentCoordinates(
+                        accident_id=accident.id,
+                        latitude=geom['latitude'],
+                        longitude=geom['longitude']
+                    )
+                    db.session.add(acc_coord)
 
         db.session.commit()
         message = "Accident record added successfully."
@@ -60,7 +62,7 @@ def get_accidents():
 
     accidents_list = []
     for accident in accidents:
-        coords_list = [coord.geometry for coord in accident.coordinates]
+        coords_list = [[{'latitude': coord.latitude, 'longitude': coord.longitude} for coord in accident.coordinates]]
         accidents_list.append({
             'id': accident.id,
             'timestamp': accident.timestamp.isoformat(),
@@ -83,8 +85,8 @@ def get_accident(id):
         if not accident:
             return jsonify({'error': f'Accident with id {id} not found'}), 404
 
-        coords_list = [coord.geometry for coord in accident.coordinates]
-
+        coords_list = [[{'latitude': coord.latitude, 'longitude': coord.longitude} for coord in accident.coordinates]]
+        
         accident_data = {
             'id': accident.id,
             'timestamp': accident.timestamp.isoformat(),
@@ -117,15 +119,17 @@ def add_traffic():
             longitude=data.get('longitude')
         )
         db.session.add(traffic)
-        db.session.flush()  # Flush to get the traffic id before committing
+        db.session.flush()  
 
         if 'geometry' in data:
-            for geom in data['geometry'][0]:
-                traffic_coord = TrafficCoordinates(
-                    traffic_id=traffic.id,
-                    geometry=geom
-                )
-                db.session.add(traffic_coord)
+            for geom_list in data['geometry']: 
+                for geom in geom_list:  
+                    traffic_coord = TrafficCoordinates(
+                        traffic_id=traffic.id,
+                        latitude=geom['latitude'],
+                        longitude=geom['longitude']
+                    )
+                    db.session.add(traffic_coord)
 
         db.session.commit()
         message = "Traffic record added successfully."
@@ -145,7 +149,7 @@ def get_traffic():
 
     traffic_list = []
     for data in traffic_data:
-        coords_list = [coord.geometry for coord in data.coordinates]
+        coords_list = [[{'latitude': coord.latitude, 'longitude': coord.longitude} for coord in data.coordinates]]
         traffic_list.append({
             'id': data.id,
             'timestamp': data.timestamp.isoformat(),
@@ -167,8 +171,8 @@ def get_traffic_data(id):
         if not traffic_data:
             return jsonify({'error': f'Traffic data with id {id} not found'}), 404
 
-        coords_list = [coord.geometry for coord in traffic_data.coordinates]
-
+        coords_list = [[{'latitude': coord.latitude, 'longitude': coord.longitude} for coord in traffic_data.coordinates]]
+        
         traffic_details = {
             'id': traffic_data.id,
             'timestamp': traffic_data.timestamp.isoformat(),
