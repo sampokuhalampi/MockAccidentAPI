@@ -7,4 +7,4 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     # It's a really bad practice to store the API key in the code 
     # -> This would be fixed if it were used for something other than the test.
-    API_KEY = os.environ['API_KEY']
+    API_KEY = 'ASDAPIkey'
