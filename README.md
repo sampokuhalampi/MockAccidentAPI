@@ -47,7 +47,7 @@ pip install -r requirements.txt
 
 To run all tests, navigate to the tests directory of the project and use the following command:
 
-python -m unittest discover tests
+python (or python3) -m unittest discover tests
 
 This command will discover all test files in the tests directory and execute them.
 
@@ -55,7 +55,7 @@ This command will discover all test files in the tests directory and execute the
 
 If you wish to run a specific test, you can do so by specifying the path to the test file and the test case name. For example:
 
-python -m unittest tests.test_app.TestCase.test_get_accidents
+python (or python3) -m unittest tests.test_app.TestCase.test_get_accidents
 
 This command will only run the test_get_accidents test within the TestCase class in the test_app.py file located in the tests directory.
 
