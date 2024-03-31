@@ -80,6 +80,41 @@
 					"response": []
 				},
 				{
+					"name": "Add new traffic data ASD Kaakkuri (DEMO)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "API-KEY",
+								"value": "asdmockapikey24",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"timestamp\": \"2024-03-03T12:00:00\",\n    \"volume\": 100,\n    \"averageSpeed\": 60,\n    \"congestionLevel\": \"High\",\n    \"geometry\": [\n        [\n            {\"latitude\": 64.978168, \"longitude\": 25.509290},\n            {\"latitude\": 64.978158, \"longitude\": 25.509405},\n            {\"latitude\": 64.978130, \"longitude\": 25.509376}\n        ]\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://asd-mock-accident-api.rahtiapp.fi/traffic",
+							"protocol": "https",
+							"host": [
+								"asd-mock-accident-api",
+								"rahtiapp",
+								"fi"
+							],
+							"path": [
+								"traffic"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Get all traffic data ASD",
 					"request": {
 						"method": "GET",
@@ -193,6 +228,48 @@
 						"body": {
 							"mode": "raw",
 							"raw": "{\n  \"timestamp\": \"2024-03-03T12:00:00\",\n  \"accident_type\": \"Collision\",\n  \"severity\": \"Major\",\n  \"participants\": 10,\n  \"weather_conditions\": \"Snowy\",\n  \"geometry\": [\n    [\n      {\"latitude\": 64.978168, \"longitude\": 25.509290},\n      {\"latitude\": 64.978158, \"longitude\": 25.509405},\n      {\"latitude\": 64.978130, \"longitude\": 25.509376}\n    ]\n  ]\n}\n\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://asd-mock-accident-api.rahtiapp.fi/accidents",
+							"protocol": "https",
+							"host": [
+								"asd-mock-accident-api",
+								"rahtiapp",
+								"fi"
+							],
+							"path": [
+								"accidents"
+							],
+							"query": [
+								{
+									"key": "APi",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add new Accidents ASD Raksila (for DEMO)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "API-KEY",
+								"value": "asdmockapikey24",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"timestamp\": \"2024-03-03T12:00:00\",\n  \"accident_type\": \"Collision\",\n  \"severity\": \"Major\",\n  \"participants\": 10,\n  \"weather_conditions\": \"Snowy\",\n  \"geometry\": [\n    [\n        {\"latitude\": 64.993573, \"longitude\": 25.505111},\n        {\"latitude\": 64.993572, \"longitude\": 25.505156},\n        {\"latitude\": 64.993559, \"longitude\": 25.505091}\n    ]\n  ]\n}\n\n",
 							"options": {
 								"raw": {
 									"language": "json"

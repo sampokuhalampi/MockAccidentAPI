@@ -168,6 +168,85 @@
 					"response": []
 				},
 				{
+					"name": "Add new accident ASD Raksila (DEMO/DEV)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "admin:8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Access-Control-Request-Headers",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "API-KEY",
+								"value": "ASDAPIkey",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"timestamp\": \"2024-03-03T12:00:00\",\n  \"accident_type\": \"Collision\",\n  \"severity\": \"Major\",\n  \"participants\": 10,\n  \"weather_conditions\": \"Snowy\",\n  \"geometry\": [\n    [\n        {\"latitude\": 64.993573, \"longitude\": 25.505111},\n        {\"latitude\": 64.993572, \"longitude\": 25.505156},\n        {\"latitude\": 64.993559, \"longitude\": 25.505091}\n    ]\n  ]\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/accidents",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"accidents"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "sampo",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "snowledge",
+									"disabled": true
+								},
+								{
+									"key": "is_Admin",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Create and post new accident"
+					},
+					"response": []
+				},
+				{
 					"name": "Get all accidents ASD",
 					"request": {
 						"method": "GET",
@@ -283,6 +362,44 @@
 						"body": {
 							"mode": "raw",
 							"raw": "{\n    \"timestamp\": \"2024-03-03T12:00:00\",\n    \"volume\": 100,\n    \"averageSpeed\": 60,\n    \"congestionLevel\": \"High\",\n    \"geometry\": [\n        [\n            {\"latitude\": 64.993573, \"longitude\": 25.505111},\n            {\"latitude\": 64.993572, \"longitude\": 25.505156},\n            {\"latitude\": 64.993559, \"longitude\": 25.505091}\n        ]\n    ]\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/traffic",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"traffic"
+							]
+						},
+						"description": "Create and post new traffic information"
+					},
+					"response": []
+				},
+				{
+					"name": "Add traffic data ASD Kaakkuri (DEMO/DEV)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "API-KEY",
+								"value": "ASDAPIkey",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"timestamp\": \"2024-03-03T12:00:00\",\n    \"volume\": 100,\n    \"averageSpeed\": 60,\n    \"congestionLevel\": \"High\",\n    \"geometry\": [\n        [\n            {\"latitude\": 64.978168, \"longitude\": 25.509290},\n            {\"latitude\": 64.978158, \"longitude\": 25.509405},\n            {\"latitude\": 64.978130, \"longitude\": 25.509376}\n        ]\n    ]\n}\n",
 							"options": {
 								"raw": {
 									"language": "json"
