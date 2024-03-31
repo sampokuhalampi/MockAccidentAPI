@@ -22,7 +22,42 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"latitude\": 60.192059,\n    \"longitude\": 24.945831,\n    \"timestamp\": \"2024-03-03T12:00:00\",\n    \"volume\": 100,\n    \"averageSpeed\": 80,\n    \"congestionLevel\": \"High\",\n    \"geometry\": [\n        [\n            {\"latitude\": 60.192059, \"longitude\": 24.945831},\n            {\"latitude\": 60.193000, \"longitude\": 24.946000},\n            {\"latitude\": 60.194000, \"longitude\": 24.947000}\n        ]\n    ]\n}",
+							"raw": "{\n    \"timestamp\": \"2024-03-03T12:00:00\",\n    \"volume\": 100,\n    \"averageSpeed\": 80,\n    \"congestionLevel\": \"High\",\n    \"geometry\": [\n        [\n            {\"latitude\": 60.192059, \"longitude\": 24.945831},\n            {\"latitude\": 60.193000, \"longitude\": 24.946000},\n            {\"latitude\": 60.194000, \"longitude\": 24.947000}\n        ]\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://asd-mock-accident-api.rahtiapp.fi/traffic",
+							"protocol": "https",
+							"host": [
+								"asd-mock-accident-api",
+								"rahtiapp",
+								"fi"
+							],
+							"path": [
+								"traffic"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add new traffic data ASD Raksila (DEMO)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "API-KEY",
+								"value": "asdmockapikey24",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"timestamp\": \"2024-03-03T12:00:00\",\n    \"volume\": 100,\n    \"averageSpeed\": 60,\n    \"congestionLevel\": \"High\",\n    \"geometry\": [\n        [\n            {\"latitude\": 64.993573, \"longitude\": 25.505111},\n            {\"latitude\": 64.993572, \"longitude\": 25.505156},\n            {\"latitude\": 64.993559, \"longitude\": 25.505091}\n        ]\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -69,6 +104,33 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Get traffic data by ID ASD",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "API-KEY",
+								"value": "asdmockapikey24",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://asd-mock-accident-api.rahtiapp.fi/traffic/1",
+							"protocol": "https",
+							"host": [
+								"asd-mock-accident-api",
+								"rahtiapp",
+								"fi"
+							],
+							"path": [
+								"traffic",
+								"1"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -88,15 +150,65 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"timestamp\": \"2024-03-03T12:00:00\",\n  \"accident_type\": \"Collision\",\n  \"severity\": \"Minor\",\n  \"participants\": 2,\n  \"weather_conditions\": \"Clear\",\n  \"geometry\": [\n    [\n      {\"latitude\": 60.192059, \"longitude\": 24.945831},\n      {\"latitude\": 60.193000, \"longitude\": 24.946000},\n      {\"latitude\": 60.194000, \"longitude\": 24.947000}\n    ]\n  ]\n}"
+							"raw": "{\n  \"timestamp\": \"2024-03-03T12:00:00\",\n  \"accident_type\": \"Collision\",\n  \"severity\": \"Minor\",\n  \"participants\": 2,\n  \"weather_conditions\": \"Clear\",\n  \"geometry\": [\n    [\n      {\"latitude\": 60.192059, \"longitude\": 24.945831},\n      {\"latitude\": 60.193000, \"longitude\": 24.946000},\n      {\"latitude\": 60.194000, \"longitude\": 24.947000}\n    ]\n  ]\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
-							"raw": "https://asd-mock-accident-api.rahtiapp.fi",
+							"raw": "https://asd-mock-accident-api.rahtiapp.fi/accidents",
 							"protocol": "https",
 							"host": [
 								"asd-mock-accident-api",
 								"rahtiapp",
 								"fi"
+							],
+							"path": [
+								"accidents"
+							],
+							"query": [
+								{
+									"key": "APi",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add new Accidents ASD Kaakkuri (for DEMO)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "API-KEY",
+								"value": "asdmockapikey24",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"timestamp\": \"2024-03-03T12:00:00\",\n  \"accident_type\": \"Collision\",\n  \"severity\": \"Major\",\n  \"participants\": 10,\n  \"weather_conditions\": \"Snowy\",\n  \"geometry\": [\n    [\n      {\"latitude\": 64.978168, \"longitude\": 25.509290},\n      {\"latitude\": 64.978158, \"longitude\": 25.509405},\n      {\"latitude\": 64.978130, \"longitude\": 25.509376}\n    ]\n  ]\n}\n\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://asd-mock-accident-api.rahtiapp.fi/accidents",
+							"protocol": "https",
+							"host": [
+								"asd-mock-accident-api",
+								"rahtiapp",
+								"fi"
+							],
+							"path": [
+								"accidents"
 							],
 							"query": [
 								{
@@ -147,7 +259,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://asd-mock-accident-api.rahtiapp.fi/accidents/1",
+							"raw": "https://asd-mock-accident-api.rahtiapp.fi/accidents/16",
 							"protocol": "https",
 							"host": [
 								"asd-mock-accident-api",
@@ -156,7 +268,7 @@
 							],
 							"path": [
 								"accidents",
-								"1"
+								"16"
 							]
 						}
 					},
@@ -273,15 +385,23 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"latitude\": 60.192059,\n  \"longitude\": 24.945831,\n  \"timestamp\": \"2024-03-03T12:00:00\",\n  \"accident_type\": \"Collision\",\n  \"severity\": \"Minor\",\n  \"participants\": 2,\n  \"weather_conditions\": \"Clear\"\n}"
+							"raw": "{\n  \"latitude\": 60.192059,\n  \"longitude\": 24.945831,\n  \"timestamp\": \"2024-03-03T12:00:00\",\n  \"accident_type\": \"Collision\",\n  \"severity\": \"Minor\",\n  \"participants\": 2,\n  \"weather_conditions\": \"Clear\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
-							"raw": "https://asd-mock-accident-api.rahtiapp.fi",
+							"raw": "https://asd-mock-accident-api.rahtiapp.fi/accidents",
 							"protocol": "https",
 							"host": [
 								"asd-mock-accident-api",
 								"rahtiapp",
 								"fi"
+							],
+							"path": [
+								"accidents"
 							],
 							"query": [
 								{
@@ -348,33 +468,6 @@
 					"response": []
 				}
 			]
-		},
-		{
-			"name": "Get traffic data by ID ASD",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "API-KEY",
-						"value": "asdmockapikey24",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "https://asd-mock-accident-api.rahtiapp.fi/traffic/1",
-					"protocol": "https",
-					"host": [
-						"asd-mock-accident-api",
-						"rahtiapp",
-						"fi"
-					],
-					"path": [
-						"traffic",
-						"1"
-					]
-				}
-			},
-			"response": []
 		}
 	]
 }
