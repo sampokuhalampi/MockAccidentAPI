@@ -304,6 +304,64 @@
 						"description": "Get spesific accident by id"
 					},
 					"response": []
+				},
+				{
+					"name": "Delete all accidents ASD",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "API-KEY",
+								"value": "ASDAPIkey",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:5000/accidents/clear",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"accidents",
+								"clear"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete all accidents by ID ASD",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "API-KEY",
+								"value": "ASDAPIkey",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:5000/accidents/clear",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"accidents",
+								"clear"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -482,6 +540,64 @@
 						"description": "Get spesific traffic information by id"
 					},
 					"response": []
+				},
+				{
+					"name": "Delete all traffic ASD",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "API-KEY",
+								"value": "ASDAPIkey",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:5000/traffic/clear",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"traffic",
+								"clear"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete all traffic by ID ASD",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "API-KEY",
+								"value": "ASDAPIkey",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:5000/traffic/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"traffic",
+								"1"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -625,6 +741,64 @@
 						"description": "Get all the accidents"
 					},
 					"response": []
+				},
+				{
+					"name": "Delete all accidents",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "API-KEY",
+								"value": "ASDAPIkey",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:5000/accidents/clear",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"accidents",
+								"clear"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete all accidents by ID",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "API-KEY",
+								"value": "ASDAPIkey",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:5000/accidents/clear",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"accidents",
+								"clear"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -725,6 +899,64 @@
 							]
 						},
 						"description": "Get spesific traffic information by id"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete all traffic",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "API-KEY",
+								"value": "ASDAPIkey",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:5000/accidents/clear",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"accidents",
+								"clear"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete all traffic by ID",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "API-KEY",
+								"value": "ASDAPIkey",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:5000/accidents/clear",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"accidents",
+								"clear"
+							]
+						}
 					},
 					"response": []
 				}

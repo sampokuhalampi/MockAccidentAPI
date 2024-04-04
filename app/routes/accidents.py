@@ -1,10 +1,12 @@
-from flask import request, jsonify, abort
-from functools import wraps
-from app import app, db
-from app.models import Accident, AccidentCoordinates, Traffic, TrafficCoordinates
+from flask import Blueprint, request, jsonify, abort
 from datetime import datetime
 from sqlalchemy.exc import SQLAlchemyError
+from functools import wraps
+from app import db
+from app.models import Accident, AccidentCoordinates
 from config import Config
+
+accidents_bp = Blueprint('accidents', __name__)
 
 # API Key verification decorator
 def require_api_key(f):
@@ -17,7 +19,7 @@ def require_api_key(f):
         return f(*args, **kwargs)
     return decorated_function
 
-@app.route('/accidents', methods=['POST'])
+@accidents_bp.route('', methods=['POST'])
 @require_api_key
 def add_accident():
     data = request.get_json()
@@ -52,7 +54,7 @@ def add_accident():
 
     return jsonify({'message': message}), 201
 
-@app.route('/accidents', methods=['GET'])
+@accidents_bp.route('', methods=['GET'])
 @require_api_key
 def get_accidents():
     try:
@@ -77,7 +79,7 @@ def get_accidents():
 
     return jsonify(accidents_list)
 
-@app.route('/accidents/<int:id>', methods=['GET'])
+@accidents_bp.route('/<int:id>', methods=['GET'])
 @require_api_key
 def get_accident(id):
     try:
@@ -104,87 +106,29 @@ def get_accident(id):
 
     return jsonify(accident_data)
 
-# traffic
-@app.route('/traffic', methods=['POST'])
+@accidents_bp.route('/clear', methods=['DELETE'])
 @require_api_key
-def add_traffic():
-    data = request.get_json()
+def clear_accidents():
     try:
-        traffic = Traffic(
-            timestamp=datetime.fromisoformat(data['timestamp']),
-            volume=data['volume'],
-            average_speed=data['averageSpeed'],
-            congestion_level=data.get('congestionLevel', None),
-            latitude=data.get('latitude'),
-            longitude=data.get('longitude')
-        )
-        db.session.add(traffic)
-        db.session.flush()  
-
-        if 'geometry' in data:
-            for geom_list in data['geometry']: 
-                for geom in geom_list:  
-                    traffic_coord = TrafficCoordinates(
-                        traffic_id=traffic.id,
-                        latitude=geom['latitude'],
-                        longitude=geom['longitude']
-                    )
-                    db.session.add(traffic_coord)
-
+        num_rows_deleted = db.session.query(Accident).delete()
         db.session.commit()
-        message = "Traffic record added successfully."
+        return jsonify({'message': f'Successfully removed {num_rows_deleted} accident records.'}), 200
     except SQLAlchemyError as e:
         db.session.rollback()
-        return jsonify({'error': 'Failed to add traffic record: ' + str(e)}), 500
+        return jsonify({'error': f'Error clearing accident records: {str(e)}'}), 500
 
-    return jsonify({'message': message}), 201
-
-@app.route('/traffic', methods=['GET'])
+@accidents_bp.route('/<int:id>', methods=['DELETE'])
 @require_api_key
-def get_traffic():
-    try:
-        traffic_data = Traffic.query.all()
-    except SQLAlchemyError as e:
-        return jsonify({'error': f'Error fetching traffic data from database: {str(e)}'}), 500
-
-    traffic_list = []
-    for data in traffic_data:
-        coords_list = [[{'latitude': coord.latitude, 'longitude': coord.longitude} for coord in data.coordinates]]
-        traffic_list.append({
-            'id': data.id,
-            'timestamp': data.timestamp.isoformat(),
-            'volume': data.volume,
-            'averageSpeed': data.average_speed,
-            'congestionLevel': data.congestion_level,
-            'latitude': data.latitude,
-            'longitude': data.longitude,
-            'geometry': coords_list
-        })
-
-    return jsonify(traffic_list)
-
-@app.route('/traffic/<int:id>', methods=['GET'])
-@require_api_key
-def get_traffic_data(id):
-    try:
-        traffic_data = Traffic.query.get(id)
-        if not traffic_data:
-            return jsonify({'error': f'Traffic data with id {id} not found'}), 404
-
-        coords_list = [[{'latitude': coord.latitude, 'longitude': coord.longitude} for coord in traffic_data.coordinates]]
-        
-        traffic_details = {
-            'id': traffic_data.id,
-            'timestamp': traffic_data.timestamp.isoformat(),
-            'volume': traffic_data.volume,
-            'averageSpeed': traffic_data.average_speed,
-            'congestionLevel': traffic_data.congestion_level,
-            'latitude': traffic_data.latitude,
-            'longitude': traffic_data.longitude,
-            'geometry': coords_list
-        }
-
-    except SQLAlchemyError as e:
-        return jsonify({'error': f'Error fetching traffic data with id {id} from database: {str(e)}'}), 500
-
-    return jsonify(traffic_details)
+def delete_accident(id):
+    accident = Accident.query.get(id)
+    if accident:
+        try:
+            AccidentCoordinates.query.filter_by(accident_id=id).delete()
+            db.session.delete(accident)
+            db.session.commit()
+            return jsonify({'message': f'Accident with id {id} successfully deleted.'}), 200
+        except SQLAlchemyError as e:
+            db.session.rollback()  
+            return jsonify({'error': f'Error deleting accident with id {id}: {str(e)}'}), 500
+    else:
+        return jsonify({'error': f'Accident with id {id} not found'}), 404

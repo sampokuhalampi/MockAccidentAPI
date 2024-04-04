@@ -166,6 +166,60 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Delete all traffic data ASD",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "API-KEY",
+								"value": "asdmockapikey24",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://asd-mock-accident-api.rahtiapp.fi/traffic/clear",
+							"protocol": "https",
+							"host": [
+								"asd-mock-accident-api",
+								"rahtiapp",
+								"fi"
+							],
+							"path": [
+								"traffic",
+								"clear"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete traffic data by ID ASD",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "API-KEY",
+								"value": "asdmockapikey24",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://asd-mock-accident-api.rahtiapp.fi/traffic/1",
+							"protocol": "https",
+							"host": [
+								"asd-mock-accident-api",
+								"rahtiapp",
+								"fi"
+							],
+							"path": [
+								"traffic",
+								"1"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -350,6 +404,60 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Delete all Accidents ASD",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "API-KEY",
+								"value": "asdmockapikey24",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://asd-mock-accident-api.rahtiapp.fi/accidents/clear",
+							"protocol": "https",
+							"host": [
+								"asd-mock-accident-api",
+								"rahtiapp",
+								"fi"
+							],
+							"path": [
+								"accidents",
+								"clear"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete accident by ID ASD",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "API-KEY",
+								"value": "asdmockapikey24",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://asd-mock-accident-api.rahtiapp.fi/accidents/1",
+							"protocol": "https",
+							"host": [
+								"asd-mock-accident-api",
+								"rahtiapp",
+								"fi"
+							],
+							"path": [
+								"accidents",
+								"1"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -421,6 +529,60 @@
 					"name": "Get traffic data by ID",
 					"request": {
 						"method": "GET",
+						"header": [
+							{
+								"key": "API-KEY",
+								"value": "asdmockapikey24",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://asd-mock-accident-api.rahtiapp.fi/traffic/1",
+							"protocol": "https",
+							"host": [
+								"asd-mock-accident-api",
+								"rahtiapp",
+								"fi"
+							],
+							"path": [
+								"traffic",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete all traffic data",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "API-KEY",
+								"value": "asdmockapikey24",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://asd-mock-accident-api.rahtiapp.fi/traffic/clear",
+							"protocol": "https",
+							"host": [
+								"asd-mock-accident-api",
+								"rahtiapp",
+								"fi"
+							],
+							"path": [
+								"traffic",
+								"clear"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete traffic data by ID",
+					"request": {
+						"method": "DELETE",
 						"header": [
 							{
 								"key": "API-KEY",
@@ -521,6 +683,60 @@
 					"name": "Get accident by ID",
 					"request": {
 						"method": "GET",
+						"header": [
+							{
+								"key": "API-KEY",
+								"value": "asdmockapikey24",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://asd-mock-accident-api.rahtiapp.fi/accidents/1",
+							"protocol": "https",
+							"host": [
+								"asd-mock-accident-api",
+								"rahtiapp",
+								"fi"
+							],
+							"path": [
+								"accidents",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete all Accidents",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "API-KEY",
+								"value": "asdmockapikey24",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://asd-mock-accident-api.rahtiapp.fi/accidents/clear",
+							"protocol": "https",
+							"host": [
+								"asd-mock-accident-api",
+								"rahtiapp",
+								"fi"
+							],
+							"path": [
+								"accidents",
+								"clear"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete accident by ID",
+					"request": {
+						"method": "DELETE",
 						"header": [
 							{
 								"key": "API-KEY",

@@ -11,12 +11,16 @@ app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{database_path}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
-
-# Initialize Flask-Migrate
 migrate = Migrate(app, db)
 
-# Import models and routes
-from app import models, routes
+from app import models
+
+# Initialize blueprints for routing
+from app.routes.accidents import accidents_bp
+from app.routes.traffic import traffic_bp
+
+app.register_blueprint(accidents_bp, url_prefix='/accidents')
+app.register_blueprint(traffic_bp, url_prefix='/traffic')
 
 def recreate_database():
     """Remove the existing database file and recreate the database."""
