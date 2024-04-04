@@ -6,7 +6,7 @@ from datetime import datetime
 class TestCase(unittest.TestCase):
 
     def setUp(self):
-        print("Setting up test environment...")
+        print("Setting up the test environment...")
         app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite://'
         app.config['TESTING'] = True
         self.app = app.test_client()
@@ -16,7 +16,7 @@ class TestCase(unittest.TestCase):
             db.create_all()
 
     def tearDown(self):
-        print("Tearing down test environment...")
+        print("Tearing down the test environment...")
         with app.app_context():
             db.session.remove()
             db.drop_all()
@@ -110,5 +110,64 @@ class TestCase(unittest.TestCase):
 
         response = self.app.get(f'/traffic/{traffic_id}', headers=self.headers)
         self.assertEqual(response.status_code, 200)
+
+    def test_delete_all_accidents(self):
+        print("Testing DELETE /accidents/clear endpoint to remove all accidents...")
+        with app.app_context():
+            db.session.add(Accident(timestamp=datetime.utcnow(), accident_type="Collision", severity="Minor", participants=2, weather_conditions="Clear"))
+            db.session.add(Accident(timestamp=datetime.utcnow(), accident_type="Rollover", severity="Major", participants=1, weather_conditions="Rainy"))
+            db.session.commit()
+
+        response = self.app.delete('/accidents/clear', headers=self.headers)
+        self.assertEqual(response.status_code, 200)
+
+        with app.app_context():
+            accidents_count = Accident.query.count()
+            self.assertEqual(accidents_count, 0)
+
+    def test_delete_all_traffic(self):
+        print("Testing DELETE /traffic/clear endpoint to remove all traffic records...")
+        with app.app_context():
+            db.session.add(Traffic(timestamp=datetime.utcnow(), volume=100, average_speed=60, congestion_level="Moderate"))
+            db.session.add(Traffic(timestamp=datetime.utcnow(), volume=150, average_speed=50, congestion_level="High"))
+            db.session.commit()
+
+        response = self.app.delete('/traffic/clear', headers=self.headers)
+        self.assertEqual(response.status_code, 200)
+
+        with app.app_context():
+            traffic_count = Traffic.query.count()
+            self.assertEqual(traffic_count, 0)
+
+    def test_delete_accident_by_id(self):
+        print("Testing DELETE /accidents/{id} endpoint to remove a specific accident...")
+        with app.app_context():
+            accident = Accident(timestamp=datetime.utcnow(), accident_type="Collision", severity="Minor", participants=2, weather_conditions="Clear")
+            db.session.add(accident)
+            db.session.commit()
+            accident_id = accident.id
+
+        response = self.app.delete(f'/accidents/{accident_id}', headers=self.headers)
+        self.assertEqual(response.status_code, 200)
+
+        with app.app_context():
+            deleted_accident = db.session.get(Accident, accident_id)
+            self.assertIsNone(deleted_accident)
+
+    def test_delete_traffic_by_id(self):
+        print("Testing DELETE /traffic/{id} endpoint to remove a specific traffic record...")
+        with app.app_context():
+            traffic = Traffic(timestamp=datetime.utcnow(), volume=100, average_speed=60, congestion_level="Moderate")
+            db.session.add(traffic)
+            db.session.commit()
+            traffic_id = traffic.id
+
+        response = self.app.delete(f'/traffic/{traffic_id}', headers=self.headers)
+        self.assertEqual(response.status_code, 200)
+        
+        with app.app_context():
+            deleted_traffic = db.session.get(Traffic, traffic_id)
+            self.assertIsNone(deleted_traffic)
+
 if __name__ == '__main__':
     unittest.main()
