@@ -10,7 +10,7 @@ class Accident(db.Model):
     weather_conditions = db.Column(db.String(100), nullable=True)
     latitude = db.Column(db.Float, nullable=True)
     longitude = db.Column(db.Float, nullable=True)
-    coordinates = db.relationship('AccidentCoordinates', backref='accident', lazy=True)
+    coordinates = db.relationship('AccidentCoordinates', backref='accident', lazy=True, cascade="all, delete-orphan")
 
     def __repr__(self):
         return f'<Accident {self.id} - {self.accident_type}, Severity: {self.severity}>'
@@ -32,7 +32,7 @@ class Traffic(db.Model):
     congestion_level = db.Column(db.String(50), nullable=True)
     latitude = db.Column(db.Float, nullable=True)
     longitude = db.Column(db.Float, nullable=True)
-    coordinates = db.relationship('TrafficCoordinates', backref='traffic', lazy=True)
+    coordinates = db.relationship('TrafficCoordinates', backref='traffic', lazy=True, cascade="all, delete-orphan")
 
     def __repr__(self):
         return f'<Traffic {self.id} - Volume: {self.volume}, Avg Speed: {self.average_speed}km/h, Congestion: {self.congestion_level}>'
