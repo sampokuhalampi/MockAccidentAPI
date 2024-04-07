@@ -1,12 +1,11 @@
-from flask import Blueprint, request, jsonify, abort
+from flask import request, jsonify, abort
+from functools import wraps
+from app import app, db
+from app.models import Traffic, TrafficCoordinates
 from datetime import datetime
 from sqlalchemy.exc import SQLAlchemyError
-from functools import wraps
-from app import db
-from app.models import Traffic, TrafficCoordinates
 from config import Config
 
-traffic_bp = Blueprint('traffic', __name__)
 
 # API Key verification decorator
 def require_api_key(f):
@@ -19,7 +18,7 @@ def require_api_key(f):
         return f(*args, **kwargs)
     return decorated_function
 
-@traffic_bp.route('', methods=['POST'])
+@app.route('/traffic', methods=['POST'])
 @require_api_key
 def add_traffic():
     data = request.get_json()
@@ -53,7 +52,7 @@ def add_traffic():
 
     return jsonify({'message': message}), 201
 
-@traffic_bp.route('', methods=['GET'])
+@app.route('/traffic', methods=['GET'])
 @require_api_key
 def get_traffic():
     try:
@@ -77,7 +76,7 @@ def get_traffic():
 
     return jsonify(traffic_list)
 
-@traffic_bp.route('/<int:id>', methods=['GET'])
+@app.route('/traffic/<int:id>', methods=['GET'])
 @require_api_key
 def get_traffic_data(id):
     try:
@@ -103,18 +102,20 @@ def get_traffic_data(id):
 
     return jsonify(traffic_details)
 
-@traffic_bp.route('/clear', methods=['DELETE'])
+@app.route('/traffic/clear', methods=['DELETE'])
 @require_api_key
 def clear_traffic():
     try:
-        num_rows_deleted = db.session.query(Traffic).delete()
+        traffics = Traffic.query.all()
+        for traffic in traffics:
+            db.session.delete(traffic)
         db.session.commit()
-        return jsonify({'message': f'Successfully removed {num_rows_deleted} traffic records.'}), 200
+        return jsonify({'message': 'Successfully removed all traffic records.'}), 200
     except SQLAlchemyError as e:
         db.session.rollback()
         return jsonify({'error': f'Error clearing traffic records: {str(e)}'}), 500
 
-@traffic_bp.route('/<int:id>', methods=['DELETE'])
+@app.route('/traffic/<int:id>', methods=['DELETE'])
 @require_api_key
 def delete_traffic(id):
     traffic_data = Traffic.query.get(id)
