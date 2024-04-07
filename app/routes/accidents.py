@@ -1,12 +1,11 @@
-from flask import Blueprint, request, jsonify, abort
+from flask import request, jsonify, abort
+from functools import wraps
+from app import app, db
+from app.models import Accident, AccidentCoordinates
 from datetime import datetime
 from sqlalchemy.exc import SQLAlchemyError
-from functools import wraps
-from app import db
-from app.models import Accident, AccidentCoordinates
 from config import Config
 
-accidents_bp = Blueprint('accidents', __name__)
 
 # API Key verification decorator
 def require_api_key(f):
@@ -19,7 +18,7 @@ def require_api_key(f):
         return f(*args, **kwargs)
     return decorated_function
 
-@accidents_bp.route('', methods=['POST'])
+@app.route('/accidents', methods=['POST'])
 @require_api_key
 def add_accident():
     data = request.get_json()
@@ -35,7 +34,7 @@ def add_accident():
         )
         db.session.add(accident)
         db.session.flush()  
-        
+
         if 'geometry' in data:
             for geom_list in data['geometry']: 
                 for geom in geom_list:  
@@ -54,7 +53,7 @@ def add_accident():
 
     return jsonify({'message': message}), 201
 
-@accidents_bp.route('', methods=['GET'])
+@app.route('/accidents', methods=['GET'])
 @require_api_key
 def get_accidents():
     try:
@@ -79,7 +78,7 @@ def get_accidents():
 
     return jsonify(accidents_list)
 
-@accidents_bp.route('/<int:id>', methods=['GET'])
+@app.route('/accidents/<int:id>', methods=['GET'])
 @require_api_key
 def get_accident(id):
     try:
@@ -106,18 +105,20 @@ def get_accident(id):
 
     return jsonify(accident_data)
 
-@accidents_bp.route('/clear', methods=['DELETE'])
+@app.route('/accidents/clear', methods=['DELETE'])
 @require_api_key
 def clear_accidents():
     try:
-        num_rows_deleted = db.session.query(Accident).delete()
+        accidents = Accident.query.all()
+        for accident in accidents:
+            db.session.delete(accident)
         db.session.commit()
-        return jsonify({'message': f'Successfully removed {num_rows_deleted} accident records.'}), 200
+        return jsonify({'message': 'Successfully removed all accident records.'}), 200
     except SQLAlchemyError as e:
         db.session.rollback()
         return jsonify({'error': f'Error clearing accident records: {str(e)}'}), 500
 
-@accidents_bp.route('/<int:id>', methods=['DELETE'])
+@app.route('/accidents/<int:id>', methods=['DELETE'])
 @require_api_key
 def delete_accident(id):
     accident = Accident.query.get(id)
