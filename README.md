@@ -64,3 +64,12 @@ This command will only run the test_get_accidents test within the TestCase class
 The output will show you which tests passed successfully and which failed, including any error messages or stack traces for the failed tests.
 
 Please make sure to review the test results and fix any issues before pushing changes to the repository.
+
+## Security
+
+Implement API key authentication and include rate limiting to prevent abuse. See require_api_key decorator for implementation examples.
+
+## API Endpoint Documentation
+
+You can find documentation on API endpoint modeling and design in the "API Design and Modeling" folder.
+
